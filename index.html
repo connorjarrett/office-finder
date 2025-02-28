@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <aside>
+        <div class="office-list">
+            <select onchange="sort()">
+                <option disabled selected value="">Sort</option>
+                <option value="price-low">Lowest Price</option>
+                <option value="price-high">Highest Price</option>
+                <option value="size-low">Smallest</option>
+                <option value="size-high">Largest</option>
+                <option value="near-wat">Near Waterloo</option>
+                <option value="near-col">Near City Of London</option>
+                <option value="near-cw">Near Canary Wharf</option>
+                <option value="near-sbux">Proximity to Starbucks</option>
+                <option value="near-tube">Proximity to Tube</option>
+                <option value="near-amenities">Proximity to Starbucks & Tube</option>
+            </select>
+        </div>
+    </aside>
+    <div id="map"></div>
+
+    <sup>Results from <a href="https://www.onthemarket.com/to-rent/commercial/office/london/" target="_blank">onthemarket.com</a>, <a href="https://www.starbucks.co.uk/store-locator" target="_blank">starbucks.co.uk</a> and <a href="https://tfl.gov.uk/maps/track" target="_blank">tfl.gov.uk</a></sup>
+
+    <style>
+        :root {
+            font-family: Inter, sans-serif;
+            font-feature-settings: 'liga' 1, 'calt' 1;
+            /* fix for Chrome */
+        }
+
+        @supports (font-variation-settings: normal) {
+            :root {
+                font-family: InterVariable, sans-serif;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            display: grid;
+
+            grid-template-columns: 400px auto;
+
+            height: 100dvh;
+            width: 100dvw;
+        }
+
+        sup {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.714);
+            color: #373737;
+            padding: 2px;
+            border-bottom-left-radius: 4px;
+            z-index: 1000;
+            font-size: 12px;
+        }
+
+        sup a {
+            color: #0061d1;
+        }
+
+        .office-list select {
+            width: -webkit-fill-available;
+
+            appearance: none;
+
+            margin: 10px;
+            padding: 10px 5px;
+            box-sizing: border-box;
+
+            border-radius: 4px;
+            border: 1px solid #c6c6c6;
+            background-color: #f6f6f6;
+        }
+
+        .office-list option::before {
+            content: 'ahg';
+        }
+
+        .office-list div {
+            border-bottom: 1px solid #a4a4a4;
+            padding: 0 10px 10px 10px;
+        }
+
+        .office-list img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 4px;
+            object-fit: cover;
+            border: 1px solid #e6e6e6;
+        }
+
+        .office-list h2 {
+            margin: 10px 0;
+        }
+
+        .office-list b {
+            margin: -10px 0 5px;
+            display: block;
+        }
+
+        .office-list .buttonContainer {
+            display: flex;
+            gap: 5px;
+        }
+
+        .office-list button {
+            padding: 5px 5px;
+            border-radius: 4px;
+            border: 1px solid #c6c6c6;
+            background-color: #f6f6f6;
+            cursor: pointer;
+        }
+
+        aside {
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            height: 100%;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>
